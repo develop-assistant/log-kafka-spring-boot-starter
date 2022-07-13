@@ -57,7 +57,6 @@ public class LogbackKafkaAppender<E> extends UnsynchronizedAppenderBase<E> {
 		if (event == null || !isStarted()) {
 			return;
 		}
-		log.info("send to kafka: {}", event);
 		try {
 			final byte[] key = keyStrategy.createKey(event);
 			final byte[] payload = this.encoder.encode(event);
@@ -70,12 +69,10 @@ public class LogbackKafkaAppender<E> extends UnsynchronizedAppenderBase<E> {
 								exception.getMessage());
 					}
 					else {
-						if (log.isDebugEnabled()) {
-							System.out.printf(
-									"[log-kafka] Sent message: [%s], with partition: [%s] and offset: [%s]\r\n",
-									StandardCharsets.UTF_8.decode(ByteBuffer.wrap(payload)).toString(),
-									metadata.partition(), metadata.offset());
-						}
+						System.out.printf(
+								"[log-kafka] Sent message: [%s], with partition: [%s] and offset: [%s]\r\n",
+								StandardCharsets.UTF_8.decode(ByteBuffer.wrap(payload)).toString(),
+								metadata.partition(), metadata.offset());
 					}
 				});
 			}

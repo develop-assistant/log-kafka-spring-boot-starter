@@ -46,7 +46,7 @@
 <dependency>
   <groupId>cn.idea360</groupId>
   <artifactId>log-kafka-spring-boot-starter</artifactId>
-  <version>1.0.0</version>
+  <version>x.x.x</version>
 </dependency>
 ```
 

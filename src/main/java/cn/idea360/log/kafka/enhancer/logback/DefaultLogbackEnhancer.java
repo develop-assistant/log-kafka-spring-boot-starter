@@ -69,10 +69,9 @@ public class DefaultLogbackEnhancer extends AbstractLogEnhancer {
 		appender.setKeyStrategy(keyStrategyMap.getOrDefault(log2KafkaProperties.getKey(), new SpanIdKeyStrategy()));
 
 		// xml中不用再配置appender
-		Logger logger = this.context
-				.getLogger(Optional.ofNullable(log2KafkaProperties.getLoggerName()).orElse("cn.idea360"));
-		logger.setLevel(Level.INFO);
-		logger.addAppender(appender);
+		Logger rootLogger = this.context.getLogger(Logger.ROOT_LOGGER_NAME);
+		rootLogger.setLevel(Level.INFO);
+		rootLogger.addAppender(appender);
 	}
 
 	private LoggerContext getLoggerContext() {

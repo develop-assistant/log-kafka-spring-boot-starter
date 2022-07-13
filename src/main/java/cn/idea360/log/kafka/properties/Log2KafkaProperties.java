@@ -32,11 +32,6 @@ public class Log2KafkaProperties {
 	private String pattern;
 
 	/**
-	 * 日志包名
-	 */
-	private String loggerName;
-
-	/**
 	 * 日志分片规则, 默认 "${mdc:spanId}"
 	 */
 	private String key = "${mdc:spanId}";

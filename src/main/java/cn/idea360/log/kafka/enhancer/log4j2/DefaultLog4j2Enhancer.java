@@ -46,7 +46,7 @@ public class DefaultLog4j2Enhancer extends AbstractLogEnhancer {
 
 		// set layout
 		final Layout<? extends Serializable> layout = PatternLayout.newBuilder()
-				.withPattern(Optional.of(CONSOLE_LOG_PATTERN).orElse(DefaultConfiguration.DEFAULT_PATTERN))
+				.withPattern(Optional.ofNullable(log2KafkaProperties.getPattern()).orElse(DefaultConfiguration.DEFAULT_PATTERN))
 				.withConfiguration(configuration).build();
 
 		// set kafka config
@@ -63,7 +63,7 @@ public class DefaultLog4j2Enhancer extends AbstractLogEnhancer {
 
 		// xml中不用再配置appender
 		Logger logger = this.context
-				.getLogger(Optional.ofNullable(log2KafkaProperties.getLoggerName()).orElse("cn.idea360"));
+				.getRootLogger();
 		logger.setLevel(Level.INFO);
 		logger.addAppender(appender);
 	}

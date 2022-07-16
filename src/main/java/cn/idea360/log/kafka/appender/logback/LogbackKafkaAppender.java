@@ -69,10 +69,12 @@ public class LogbackKafkaAppender<E> extends UnsynchronizedAppenderBase<E> {
 								exception.getMessage());
 					}
 					else {
-						System.out.printf(
-								"[log-kafka] Sent message: [%s], with partition: [%s] and offset: [%s]\r\n",
-								StandardCharsets.UTF_8.decode(ByteBuffer.wrap(payload)).toString(),
-								metadata.partition(), metadata.offset());
+						if (log.isDebugEnabled()) {
+							System.out.printf(
+									"[log-kafka] Sent message: [%s], with partition: [%s] and offset: [%s]\r\n",
+									StandardCharsets.UTF_8.decode(ByteBuffer.wrap(payload)).toString(),
+									metadata.partition(), metadata.offset());
+						}
 					}
 				});
 			}
